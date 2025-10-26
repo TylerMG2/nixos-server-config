@@ -77,24 +77,12 @@
 
   #TODO: Move out
   # Docker + Portainer Setup
-  # Enable system Docker (root)
   virtualisation.docker = {
-    enable = true;
-    extraOptions = "--dns 1.1.1.1 --dns 8.8.8.8";
-  };
+    enable = false;
 
-  # Use Docker backend for OCI containers
-  virtualisation.oci-containers = {
-    backend = "docker";
-    containers.portainer = {
-      image = "portainer/portainer-ce:latest";
-      autoStart = true;
-      ports = ["9443:9443"];
-      volumes = [
-        "/var/run/docker.sock:/var/run/docker.sock"
-        "/home/tylerg/portainer-data:/data"
-      ];
-      user = "tylerg"; # container runs as root
+    rootless = {
+      enable = true;
+      setSocketVariable = true;
     };
   };
 
