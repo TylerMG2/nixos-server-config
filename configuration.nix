@@ -70,7 +70,10 @@
   services.vscode-server.enable = true;
 
   # FIX
-  networking.firewall.enable = true;
+  networking.firewall = {
+    enable = true;
+    allowedTCPPorts = [22 9443];
+  };
 
   #TODO: Move out
   # Docker + Portainer Setup
