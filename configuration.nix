@@ -86,17 +86,17 @@
     };
   };
 
-  # virtualisation.oci-containers = {
-  #   containers.portainer = {
-  #     image = "docker.io/portainer/portainer-ce:latest";
-  #     autoStart = true;
-  #     ports = ["9443:9443"];
-  #     volumes = [
-  #       "/home/tylerg/portainer-data:/data"
-  #     ];
-  #     user = "tylerg"; # run rootless as this user
-  #   };
-  # };
+  virtualisation.oci-containers = {
+    containers.portainer = {
+      image = "docker.io/portainer/portainer-ce:latest";
+      autoStart = true;
+      ports = ["9443:9443"];
+      volumes = [
+        "/home/tylerg/portainer-data:/data"
+      ];
+      #user = "tylerg"; # run rootless as this user
+    };
+  };
 
   system.stateVersion = "25.05";
 }
