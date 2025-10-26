@@ -97,13 +97,13 @@
     };
   };
 
-  virtualisation.containers.enable = true;
+  # virtualisation.containers.enable = true;
 
-  virtualisation.podman = {
-    enable = true;
-    dockerCompat = true;
-    defaultNetwork.settings = {dns_enabled = true;};
-  };
+  # virtualisation.podman = {
+  #   enable = true;
+  #   dockerCompat = true;
+  #   defaultNetwork.settings = {dns_enabled = true;};
+  # };
 
   virtualisation.oci-containers = {
     containers.portainer = {
