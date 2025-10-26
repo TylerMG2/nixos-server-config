@@ -115,8 +115,5 @@
     wantedBy = ["default.target"];
   };
 
-  # Enable lingering so dockerUser services start at boot
-  systemd.user.lingering.docker = true;
-
   system.stateVersion = "25.05";
 }
