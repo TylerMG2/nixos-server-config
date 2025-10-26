@@ -96,6 +96,14 @@
     };
   };
 
+  virtualisation.containers.enable = true;
+
+  virtualisation.podman = {
+    enable = true;
+    dockerCompat = true;
+    defaultNetwork.settings = {dns_enabled = true;};
+  };
+
   virtualisation.oci-containers = {
     containers.portainer = {
       image = "docker.io/portainer/portainer-ce:latest";
