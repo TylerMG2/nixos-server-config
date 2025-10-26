@@ -72,5 +72,33 @@
   # FIX
   networking.firewall.enable = true;
 
+  #TODO: Move out
+  # Docker + Portainer Setup
+  virtualisation.docker = {
+    enable = false;
+    rootless = {
+      enable = true;
+      setSocketVariable = true;
+      daemon.settings = {
+        dns = ["1.1.1.1" "8.8.8.8"];
+      };
+    };
+  };
+
+  virtualisation.oci-containers = {
+    backend = "docker";
+    containers.portainer = {
+      image = "portainer/portainer-ce:latest";
+      user = "dockeruser";
+      autoStart = true;
+      restartPolicy = "always";
+      ports = ["9443:9443"];
+      volumes = [
+        "/home/dockeruser/docker.sock:/var/run/docker.sock"
+        "/home/dockeruser/portainer-data:/data"
+      ];
+    };
+  };
+
   system.stateVersion = "25.05";
 }
