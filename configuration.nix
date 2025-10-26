@@ -89,15 +89,15 @@
   };
 
   virtualisation.oci-containers = {
-    backend = "docker";
+    backend = "podman";
     containers.portainer = {
       image = "portainer/portainer-ce:latest";
       user = "tylerg";
       autoStart = true;
       ports = ["9443:9443"];
       volumes = [
-        "/home/dockeruser/docker.sock:/var/run/docker.sock"
-        "/home/dockeruser/portainer-data:/data"
+        "/home/tylerg/docker.sock:/var/run/docker.sock"
+        "/home/tylerg/portainer-data:/data"
       ];
     };
   };
