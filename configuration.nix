@@ -96,7 +96,7 @@
       autoStart = true;
       ports = ["9443:9443"];
       volumes = [
-        "/home/tylerg/docker.sock:/var/run/docker.sock"
+        "/run/user/1000/podman/podman.sock:/var/run/podman.sock"
         "/home/tylerg/portainer-data:/data"
       ];
     };
