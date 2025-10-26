@@ -48,7 +48,7 @@
   users.users.tylerg = {
     isNormalUser = true;
     description = "Tyler Gwin";
-    extraGroups = ["networkmanager" "wheel"];
+    extraGroups = ["networkmanager" "wheel" "oci"];
     hashedPasswordFile = "/etc/nixos/tylerg.passwd";
     packages = with pkgs; [];
   };
