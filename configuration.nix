@@ -86,6 +86,7 @@
     createHome = true;
     group = "podman";
     uid = 993;
+    linger = true;
   };
 
   virtualisation.docker = {
