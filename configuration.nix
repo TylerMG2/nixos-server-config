@@ -120,14 +120,14 @@
   };
 
   #Test nginx container
-  virtualisation.oci-containers.containers.nginx_test = {
-    image = "nginx:latest";
+  virtualisation.oci-containers.containers.echo_test = {
+    image = "docker.io/hashicorp/http-echo:latest";
     autoStart = true;
-    ports = ["8080:80"]; # Expose port 80 inside container to 8080 on host
-    user = "993"; # run rootless as the same podman user
-    volumes = [
-      "/home/podman/nginx_cache:/var/cache/nginx"
+    ports = ["8080:5678"];
+    cmd = [
+      "-text=Hello from Podman rootless!"
     ];
+    user = "993";
   };
 
   system.stateVersion = "25.05";
