@@ -86,6 +86,8 @@
     };
   };
 
+  systemd.services.podman-portainer.enable = false;
+
   virtualisation.oci-containers = {
     containers.portainer = {
       image = "docker.io/portainer/portainer-ce:latest";
