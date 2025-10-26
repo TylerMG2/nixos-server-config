@@ -89,9 +89,8 @@
     backend = "docker";
     containers.portainer = {
       image = "portainer/portainer-ce:latest";
-      user = "dockeruser";
+      user = "tylerg";
       autoStart = true;
-      restartPolicy = "always";
       ports = ["9443:9443"];
       volumes = [
         "/home/dockeruser/docker.sock:/var/run/docker.sock"
