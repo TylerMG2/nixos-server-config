@@ -49,7 +49,7 @@
   users.users.tylerg = {
     isNormalUser = true;
     description = "Tyler Gwin";
-    extraGroups = ["networkmanager" "wheel" "oci" "podman"];
+    extraGroups = ["networkmanager" "wheel" "oci"];
     hashedPasswordFile = "/etc/nixos/tylerg.passwd";
     packages = with pkgs; [];
   };
@@ -78,6 +78,14 @@
 
   #TODO: Move out
   # Docker + Portainer Setup
+  users.users.podman = {
+    isSystemUser = true;
+    isNormalUser = false;
+    description = "Podman user";
+    home = "/var/lib/podman";
+    createHome = true;
+  };
+
   virtualisation.docker = {
     enable = false;
 
@@ -88,20 +96,14 @@
   };
 
   virtualisation.oci-containers = {
-    serviceConfig = {
-      Restart = "always";
-      RestartSec = 5; # wait 5 seconds before restarting
-      StartLimitIntervalSec = 0; # disables systemd’s start limit
-      Delegate = "yes";
-    };
     containers.portainer = {
       image = "docker.io/portainer/portainer-ce:latest";
       autoStart = true;
       ports = ["9443:9443"];
       volumes = [
-        "/home/tylerg/portainer-data:/data"
+        "/var/lib/podman/portainer:/data"
       ];
-      user = "tylerg"; # run rootless as this user
+      user = config.users.users.podman.uid; # run rootless as this user
     };
   };
 
