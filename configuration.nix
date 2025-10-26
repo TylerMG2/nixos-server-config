@@ -114,7 +114,7 @@
         "/home/podman/portainer:/data"
         "/run/user/993/podman/podman.sock:/var/run/docker.sock"
       ];
-      user = 993; # run rootless as podman user
+      user = "993"; # run rootless as podman user
     };
   };
 
@@ -123,7 +123,7 @@
     image = "nginx:latest";
     autoStart = true;
     ports = ["8080:80"]; # Expose port 80 inside container to 8080 on host
-    user = 993; # run rootless as the same podman user
+    user = "993"; # run rootless as the same podman user
     volumes = []; # no persistent volume needed for testing
   };
 
