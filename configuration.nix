@@ -61,17 +61,16 @@
   ];
 
   # Enable the OpenSSH daemon. TODO: Remove root login and password login
-  services.openssh.enable = true;
+  services.openssh = {
+    enable = true;
+    openFirewall = true;
+  };
 
   # Vscode server
   services.vscode-server.enable = true;
 
   # FIX
   networking.firewall.enable = true;
-  networking.firewall.allowedTCPPorts = [
-    22
-  ];
-  networking.firewall.allowedUDPPorts = [22];
 
   system.stateVersion = "25.05";
 }
