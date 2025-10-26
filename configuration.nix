@@ -87,6 +87,7 @@
   };
 
   virtualisation.oci-containers = {
+    backend = "docker";
     containers.portainer = {
       image = "docker.io/portainer/portainer-ce:latest";
       autoStart = true;
@@ -94,7 +95,7 @@
       volumes = [
         "/home/tylerg/portainer-data:/data"
       ];
-      #user = "tylerg"; # run rootless as this user
+      user = "tylerg"; # run rootless as this user
     };
   };
 
