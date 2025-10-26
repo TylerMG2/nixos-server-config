@@ -82,7 +82,7 @@
     isSystemUser = true;
     isNormalUser = false;
     description = "Podman user";
-    home = "/var/lib/podman";
+    home = "/home/podman";
     createHome = true;
     group = "podman";
   };
@@ -102,7 +102,7 @@
       autoStart = true;
       ports = ["9443:9443"];
       volumes = [
-        "/var/lib/podman/portainer:/data"
+        "/home/podman/portainer:/data"
       ];
       user = config.users.users.podman.uid; # run rootless as this user
     };
