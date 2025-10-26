@@ -77,42 +77,25 @@
 
   #TODO: Move out
   # Docker + Portainer Setup
+  # Enable system Docker (root)
   virtualisation.docker = {
-    enable = false;
-    rootless = {
-      enable = true;
-      setSocketVariable = true;
-      daemon.settings = {
-        dns = ["1.1.1.1" "8.8.8.8"];
-      };
-    };
+    enable = true;
+    extraOptions = "--dns 1.1.1.1 --dns 8.8.8.8";
   };
 
-  # Create a dedicated docker user
-  users.users.docker = {
-    isNormalUser = true;
-    linger = true;
-    packages = with pkgs; [];
-  };
-
-  # Portainer container as dockerUser
-  systemd.user.services.portainer = {
-    description = "Portainer (rootless Docker)";
-    after = ["network.target" "docker.socket"];
-    serviceConfig = {
-      ExecStart = ''
-        ${pkgs.docker}/bin/docker run --rm \
-          --name portainer \
-          -p 9443:9443 \
-          -v $XDG_RUNTIME_DIR/docker.sock:/var/run/docker.sock \
-          -v /home/docker/portainer-data:/data \
-          portainer/portainer-ce:latest
-      '';
-      ExecStop = "${pkgs.docker}/bin/docker stop portainer";
-      Restart = "always";
-      User = "docker";
+  # Use Docker backend for OCI containers
+  virtualisation.oci-containers = {
+    backend = "docker";
+    containers.portainer = {
+      image = "portainer/portainer-ce:latest";
+      autoStart = true;
+      ports = ["9443:9443"];
+      volumes = [
+        "/var/run/docker.sock:/var/run/docker.sock"
+        "/home/tylerg/portainer-data:/data"
+      ];
+      user = "tylerg"; # container runs as root
     };
-    wantedBy = ["default.target"];
   };
 
   system.stateVersion = "25.05";
