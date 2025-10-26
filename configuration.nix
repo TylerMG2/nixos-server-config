@@ -123,7 +123,7 @@
     image = "nginx:latest";
     autoStart = true;
     ports = ["8080:80"]; # Expose port 80 inside container to 8080 on host
-    user = config.users.users.podman.uid; # run rootless as the same podman user
+    user = 993; # run rootless as the same podman user
     volumes = []; # no persistent volume needed for testing
   };
 
