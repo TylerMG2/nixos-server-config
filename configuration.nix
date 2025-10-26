@@ -112,7 +112,7 @@
       ports = ["9443:9443"];
       volumes = [
         "/home/podman/portainer:/data"
-        "/run/user/993/podman/podman.sock:/var/run/docker.sock"
+        #"/run/user/993/podman/podman.sock:/var/run/docker.sock"
       ];
       user = "993"; # run rootless as podman user
     };
