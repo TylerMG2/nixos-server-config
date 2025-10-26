@@ -96,6 +96,12 @@
         "/home/tylerg/portainer-data:/data"
       ];
       user = "tylerg"; # run rootless as this user
+      serviceConfig = {
+        Restart = "always";
+        RestartSec = 5; # wait 5 seconds before restarting
+        StartLimitIntervalSec = 0; # disables systemd’s start limit
+        Delegate = "yes";
+      };
     };
   };
 
