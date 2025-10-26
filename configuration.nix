@@ -84,6 +84,7 @@
     description = "Podman user";
     home = "/var/lib/podman";
     createHome = true;
+    group = "podman";
   };
 
   virtualisation.docker = {
