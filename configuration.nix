@@ -87,8 +87,6 @@
   };
 
   virtualisation.oci-containers = {
-    enable = true;
-
     containers.portainer = {
       image = "docker.io/portainer/portainer-ce:latest";
       autoStart = true;
