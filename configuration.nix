@@ -88,19 +88,35 @@
     };
   };
 
-  virtualisation.oci-containers = {
-    backend = "podman";
-    containers.portainer = {
-      image = "portainer/portainer-ce:latest";
-      user = "tylerg";
-      autoStart = true;
-      ports = ["9443:9443"];
-      volumes = [
-        "/run/user/1000/podman/podman.sock:/var/run/podman.sock"
-        "/home/tylerg/portainer-data:/data"
-      ];
-    };
+  # Create a dedicated docker user
+  users.users.docker = {
+    isNormalUser = true;
+    linger = true;
+    packages = with pkgs; [];
   };
+
+  # Portainer container as dockerUser
+  systemd.user.services.portainer = {
+    description = "Portainer (rootless Docker)";
+    after = ["network.target" "docker.socket"];
+    serviceConfig = {
+      ExecStart = ''
+        ${pkgs.docker}/bin/docker run --rm \
+          --name portainer \
+          -p 9443:9443 \
+          -v $XDG_RUNTIME_DIR/docker.sock:/var/run/docker.sock \
+          -v /home/docker/portainer-data:/data \
+          portainer/portainer-ce:latest
+      '';
+      ExecStop = "${pkgs.docker}/bin/docker stop portainer";
+      Restart = "always";
+      User = "docker";
+    };
+    wantedBy = ["default.target"];
+  };
+
+  # Enable lingering so dockerUser services start at boot
+  systemd.user.lingering.docker = true;
 
   system.stateVersion = "25.05";
 }
