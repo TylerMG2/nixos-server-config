@@ -45,6 +45,7 @@
   };
 
   # Define a user account
+  users.mutableUsers = true;
   users.users.tylerg = {
     isNormalUser = true;
     description = "Tyler Gwin";
