@@ -98,13 +98,13 @@
     };
   };
 
-  # virtualisation.containers.enable = true;
+  virtualisation.containers.enable = true;
 
-  # virtualisation.podman = {
-  #   enable = true;
-  #   dockerCompat = true;
-  #   defaultNetwork.settings = {dns_enabled = true;};
-  # };
+  virtualisation.podman = {
+    enable = true;
+    dockerCompat = true;
+    defaultNetwork.settings = {dns_enabled = true;};
+  };
 
   virtualisation.oci-containers = {
     containers.portainer = {
@@ -113,7 +113,7 @@
       ports = ["9443:9443"];
       volumes = [
         "/home/podman/portainer:/data"
-        "/run/podman/podman.sock:/var/run/docker.sock"
+        "/run/user/${toString config.users.users.podman.uid}/podman/podman.sock:/var/run/docker.sock"
       ];
       user = "${toString config.users.users.podman.uid}"; # run rootless as podman user
     };
