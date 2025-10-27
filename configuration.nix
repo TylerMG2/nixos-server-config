@@ -116,6 +116,11 @@
     };
   };
 
+  # Create dirs for portainer
+  systemd.tmpfiles.rules = [
+    ''d /home/podman/portainer 0750 podman podman''
+  ];
+
   # Home manager
   home-manager = {
     extraSpecialArgs = {inherit inputs;};

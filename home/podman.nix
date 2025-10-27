@@ -29,9 +29,4 @@
       extraPodmanArgs = ["--group-add=keep-groups"];
     };
   };
-
-  # Create dirs for portainer
-  systemd.tmpfiles.rules = [
-    ''d /home/podman/portainer 0750 podman podman''
-  ];
 }
