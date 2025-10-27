@@ -92,7 +92,7 @@
 
   users.groups.podman = {
     name = "podman";
-    gid = 993;
+    gid = 991;
   };
 
   virtualisation = {
