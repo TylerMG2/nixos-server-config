@@ -115,7 +115,7 @@
         "/home/podman/portainer:/data"
         "/run/user/993/podman/podman.sock:/var/run/docker.sock"
       ];
-      user = "993"; # run rootless as podman user
+      user = config.users.users.podman.uid; # run rootless as podman user
     };
   };
 
@@ -127,7 +127,7 @@
     cmd = [
       "-text=Hello from Podman rootless!"
     ];
-    user = "993";
+    user = config.users.users.podman.uid;
   };
 
   system.stateVersion = "25.05";
