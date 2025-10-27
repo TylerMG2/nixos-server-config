@@ -123,7 +123,10 @@
 
   # Home manager
   home-manager = {
-    extraSpecialArgs = {inherit inputs;};
+    extraSpecialArgs = {
+      inherit inputs;
+      podmanUID = config.users.users.podman.uid;
+    };
     useGlobalPkgs = true;
     backupFileExtension = "backup";
     users.podman = import ./home/podman.nix;

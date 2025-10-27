@@ -1,5 +1,6 @@
 {
   config,
+  podmanUID,
   pkgs,
   ...
 }: {
@@ -22,7 +23,7 @@
       volumes = [
         "/home/podman/portainer:/data"
         # Rootless Podman socket path:
-        "/run/user/${toString config.users.users.podman.uid}/podman/podman.sock:/var/run/docker.sock"
+        "/run/user/${toString podmanUID}/podman/podman.sock:/var/run/docker.sock"
       ];
 
       # Keep group mappings
