@@ -10,6 +10,35 @@
     stateVersion = "24.11";
   };
 
+  # Portainer pod
+  systemd.user.services.pod-portainer = {
+    Unit = {
+      Description = "Rootless Podman Portainer Pod";
+      Wants = ["network-online.target"];
+      After = ["network-online.target"];
+    };
+    Install = {
+      WantedBy = ["default.target"];
+    };
+    Service = {
+      Type = "forking";
+      ExecStartPre = [
+        "${pkgs.coreutils}/bin/sleep 2s"
+        ''
+          ${pkgs.podman}/bin/podman pod create --replace \
+            --name portainer \
+            --userns=host \
+            -p 9443:9443/tcp \
+            -p 9000:9000/tcp \
+            -p 8000:8000/tcp
+        ''
+      ];
+      ExecStart = "${pkgs.podman}/bin/podman pod start portainer";
+      ExecStop = "${pkgs.podman}/bin/podman pod stop portainer";
+      RestartSec = "1s";
+    };
+  };
+
   services.podman = {
     enable = true;
     autoUpdate.enable = true;
