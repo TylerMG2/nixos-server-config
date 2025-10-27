@@ -75,7 +75,7 @@
   # FIX
   networking.firewall = {
     enable = true;
-    allowedTCPPorts = [22 9443];
+    allowedTCPPorts = [22 9000 9443];
   };
 
   #TODO: Move out
