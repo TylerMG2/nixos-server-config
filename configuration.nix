@@ -113,9 +113,9 @@
       ports = ["9443:9443"];
       volumes = [
         "/home/podman/portainer:/data"
-        "/run/user/993/podman/podman.sock:/var/run/docker.sock"
+        "/run/user/${toString config.users.users.podman.uid}/podman/podman.sock:/var/run/docker.sock"
       ];
-      user = "podman"; # run rootless as podman user
+      user = "${toString config.users.users.podman.uid}"; # run rootless as podman user
     };
   };
 
@@ -127,7 +127,7 @@
     cmd = [
       "-text=Hello from Podman rootless!"
     ];
-    user = "${toString config.users.users.podman.uid}:${toString config.users.groups.podman.gid}";
+    user = "${toString config.users.users.podman.uid}";
   };
 
   system.stateVersion = "25.05";
