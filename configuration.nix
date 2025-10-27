@@ -115,7 +115,7 @@
         "/home/podman/portainer:/data"
         "/run/user/993/podman/podman.sock:/var/run/docker.sock"
       ];
-      user = "${toString config.users.users.podman.uid}:${toString config.users.groups.podman.gid}"; # run rootless as podman user
+      user = "podman"; # run rootless as podman user
     };
   };
 
