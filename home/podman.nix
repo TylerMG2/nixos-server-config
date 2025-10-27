@@ -27,7 +27,10 @@
       ];
 
       # Keep group mappings
-      extraPodmanArgs = ["--group-add=keep-groups"];
+      extraPodmanArgs = [
+        "--pod=portainer"
+        "--group-add=keep-groups"
+      ];
     };
   };
 }
