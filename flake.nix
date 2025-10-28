@@ -26,9 +26,12 @@
     };
 
     homeConfigurations.podman = home-manager.lib.homeManagerConfiguration {
-      pkgs = import nixpkgs { system = "x86_64-linux"; };
-      extraSpecialArgs = { inherit inputs; podmanUID = 993; };
-      modules = [ ./home/podman.nix ];
+      pkgs = import nixpkgs {system = "x86_64-linux";};
+      extraSpecialArgs = {
+        inherit inputs;
+        podmanUID = 1200;
+      };
+      modules = [./home/podman.nix];
     };
   };
 }
