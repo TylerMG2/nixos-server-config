@@ -80,6 +80,7 @@
         environment = {
           EULA = "TRUE"; # Accept the Minecraft EULA
           MEMORY = "2G"; # Allocate 2 GB RAM
+          TESTING = "123";
         };
 
         extraPodmanArgs = [
