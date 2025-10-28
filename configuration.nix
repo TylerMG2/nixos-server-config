@@ -128,6 +128,7 @@
   # Create dirs for portainer
   systemd.tmpfiles.rules = [
     ''d /home/podman/portainer 0750 podman podman''
+    ''d /home/podman/minecraft 0750 podman podman''
   ];
 
   system.stateVersion = "25.05";
