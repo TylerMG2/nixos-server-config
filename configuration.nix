@@ -94,7 +94,7 @@
     home = "/home/podman";
     createHome = true;
     group = "podman";
-    uid = 993;
+    uid = 1200;
     linger = true;
     shell = pkgs.bash; #TODO: Remove later
   };
@@ -111,7 +111,7 @@
 
   users.groups.podman = {
     name = "podman";
-    gid = 991;
+    gid = 1201;
   };
 
   virtualisation = {
