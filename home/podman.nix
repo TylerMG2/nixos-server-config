@@ -40,34 +40,6 @@
     };
   };
 
-  # Jellyfin pod
-  systemd.user.services.pod-jellyfin = {
-    Unit = {
-      Description = "Rootless Podman Jellyfin Pod";
-      Wants = ["network-online.target"];
-      After = ["network-online.target"];
-    };
-    Install = {
-      WantedBy = ["default.target"];
-    };
-    Service = {
-      Type = "forking";
-      ExecStartPre = [
-        "${pkgs.coreutils}/bin/sleep 2s"
-        ''
-          ${pkgs.podman}/bin/podman pod create --replace \
-            --name jellyfin \
-            --userns=host \
-            -p 8096:8096/tcp \
-            -p 8920:8920/tcp
-        ''
-      ];
-      ExecStart = "${pkgs.podman}/bin/podman pod start jellyfin";
-      ExecStop = "${pkgs.podman}/bin/podman pod stop jellyfin";
-      RestartSec = "1s";
-    };
-  };
-
   services.podman = {
     enable = true;
     autoUpdate.enable = true;
@@ -128,13 +100,15 @@
         ];
 
         environment = {
-          TZ = "Australia/Melbourne"; # adjust to your timezone
+          TZ = "Australia/Sydney"; # adjust to your timezone
           JELLYFIN_PublishedServerUrl = "http://your-server-ip:8096";
         };
 
         # Create or join a separate pod
         extraPodmanArgs = [
-          "--pod=jellyfin"
+          "--pod=new:jellyfin"
+          "-p=8096:8096/tcp" # Web interface
+          "-p=8920:8920/tcp" # Optional HTTPS interface
           "--group-add=keep-groups"
         ];
       };

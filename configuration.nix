@@ -82,8 +82,10 @@
   # FIX
   networking.firewall = {
     enable = true;
+    # TODO: Setup nginx proxy
     allowedTCPPorts = [
       22 # SSH
+      8920 # Jellyfin HTTPS
       9443 # Portainer HTTPS
       9000 # Portainer HTTP
       25565 # Minecraft game port
