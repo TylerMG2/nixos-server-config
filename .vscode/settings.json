@@ -6,7 +6,7 @@
             ],
             "options": {
                 "nixos.expr": "(builtins.getFlake \"/home/tylerg/github/TylerMG2/nixos-server-config\").nixosConfigurations.home-server.options",
-                //"home-manager.expr": "(builtins.getFlake \"/home/tylerg/github/TylerMG2/nixos-server-config\").homeConfigurations.podman.options"
+                "home-manager.expr": "(builtins.getFlake \"/home/tylerg/github/TylerMG2/nixos-server-config\").homeConfigurations.podman.options"
             }
         }
     }

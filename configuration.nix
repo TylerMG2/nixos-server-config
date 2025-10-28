@@ -9,6 +9,11 @@
     ./hardware-configuration.nix
   ];
 
+  # Enable flakes
+  nix.settings = {
+    experimental-features = [ "nix-command" "flakes" ];
+  };
+
   # Bootloader
   boot.loader.grub = {
     enable = true;
