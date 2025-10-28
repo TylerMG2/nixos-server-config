@@ -66,7 +66,7 @@
 
       # Minecraft server container
       minecraft = {
-        image = "itzg/minecraft-server:latest";
+        image = "docker.io/itzg/minecraft-server:latest";
         autoStart = true;
         autoUpdate = "registry";
 
