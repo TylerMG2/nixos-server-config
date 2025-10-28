@@ -22,6 +22,7 @@
       modules = [
         ./configuration.nix
         inputs.vscode-server.nixosModules.default
+        inputs.home-manager.nixosModules.default
       ];
     };
 
