@@ -85,6 +85,7 @@
     # TODO: Setup nginx proxy
     allowedTCPPorts = [
       22 # SSH
+      8096 # Jellyfin http
       8920 # Jellyfin HTTPS
       9443 # Portainer HTTPS
       9000 # Portainer HTTP
