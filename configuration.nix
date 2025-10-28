@@ -66,6 +66,7 @@
   environment.systemPackages = with pkgs; [
     git
     podman
+    home-manager
   ];
 
   # Enable the OpenSSH daemon. TODO: Remove root login and password login
