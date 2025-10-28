@@ -121,41 +121,6 @@
   systemd.tmpfiles.rules = [
     ''d /home/podman/portainer 0750 podman podman''
   ];
-
-  # Home manager
-  home-manager = {
-    extraSpecialArgs = {
-      inherit inputs;
-      podmanUID = config.users.users.podman.uid;
-    };
-    useGlobalPkgs = true;
-    backupFileExtension = "backup";
-    users.podman = import ./home/podman.nix;
-  };
-
-  # virtualisation.oci-containers = {
-  #   containers.portainer = {
-  #     image = "docker.io/portainer/portainer-ce:latest";
-  #     autoStart = true;
-  #     ports = ["9443:9443"];
-  #     volumes = [
-  #       "/home/podman/portainer:/data"
-  #       "/run/user/${toString config.users.users.podman.uid}/podman/podman.sock:/var/run/docker.sock"
-  #     ];
-  #     user = "${toString config.users.users.podman.uid}"; # run rootless as podman user
-  #   };
-  # };
-
-  # #Test nginx container
-  # virtualisation.oci-containers.containers.echo_test = {
-  #   image = "docker.io/hashicorp/http-echo:latest";
-  #   autoStart = true;
-  #   ports = ["8080:5678"];
-  #   cmd = [
-  #     "-text=Hello from Podman rootless!"
-  #   ];
-  #   user = "${toString config.users.users.podman.uid}";
-  # };
-
+ 
   system.stateVersion = "25.05";
 }

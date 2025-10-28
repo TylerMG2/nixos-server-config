@@ -13,6 +13,7 @@
   outputs = {
     self,
     nixpkgs,
+    home-manager,
     ...
   } @ inputs: {
     nixosConfigurations.home-server = nixpkgs.lib.nixosSystem {
@@ -21,8 +22,13 @@
       modules = [
         ./configuration.nix
         inputs.vscode-server.nixosModules.default
-        inputs.home-manager.nixosModules.default
       ];
+    };
+
+    homeConfigurations.podman = home-manager.lib.homeManagerConfiguration {
+      pkgs = import nixpkgs { system = "x86_64-linux"; };
+      extraSpecialArgs = { inherit inputs; podmanUID = 993; };
+      modules = [ ./home/podman.nix ];
     };
   };
 }
