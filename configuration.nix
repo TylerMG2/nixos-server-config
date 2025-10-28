@@ -99,13 +99,15 @@
     shell = pkgs.bash; #TODO: Remove later
   };
 
-  users.extraSubuids = [
-    "podman:100000:65536"
-  ];
+  # /etc/subuid
+  environment.etc."subuid".text = ''
+    podman:100000:65536
+  '';
 
-  users.extraSubgids = [
-    "podman:100000:65536"
-  ];
+  # /etc/subgid
+  environment.etc."subgid".text = ''
+    podman:100000:65536
+  '';
 
   users.groups.podman = {
     name = "podman";
