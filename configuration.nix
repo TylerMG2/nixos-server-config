@@ -96,6 +96,8 @@
     group = "podman";
     uid = 993;
     linger = true;
+    extraSubuids = ["100000 65536"];
+    extraSubgids = ["100000 65536"];
     shell = pkgs.bash; #TODO: Remove later
   };
 
