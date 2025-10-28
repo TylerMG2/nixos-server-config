@@ -82,7 +82,13 @@
   # FIX
   networking.firewall = {
     enable = true;
-    allowedTCPPorts = [22 9000 9443];
+    allowedTCPPorts = [
+      22 # SSH
+      9443 # Portainer HTTPS
+      9000 # Portainer HTTP
+      25565 # Minecraft game port
+      25575 # RCON (optional)
+    ];
   };
 
   #TODO: Move out
