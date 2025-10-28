@@ -70,9 +70,6 @@
         autoStart = true;
         autoUpdate = "registry";
 
-        # Map the standard Minecraft port
-        ports = ["25565:25565/tcp"];
-
         # Volumes for persistent data
         volumes = [
           "/home/podman/minecraft:/data"
