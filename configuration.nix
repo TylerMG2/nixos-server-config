@@ -67,6 +67,7 @@
     git
     podman
     home-manager
+    htop
   ];
 
   # Enable the OpenSSH daemon. TODO: Remove root login and password login
