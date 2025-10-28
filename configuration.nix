@@ -142,9 +142,15 @@
   };
 
   # Create dirs for portainer
+  # TODO: Maybe we can move this home configuration somehow
   systemd.tmpfiles.rules = [
     ''d /home/podman/portainer 0750 podman podman -''
     ''d /home/podman/minecraft 0750 podman podman -''
+
+    ''d /home/podman/jellyfin 0750 podman podman -''
+    ''d /home/podman/jellyfin/config 0750 podman podman -''
+    ''d /home/podman/jellyfin/cache 0750 podman podman -''
+    ''d /home/podman/jellyfin/media 0750 podman podman -''
   ];
 
   system.stateVersion = "25.05";

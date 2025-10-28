@@ -82,10 +82,36 @@
         };
 
         extraPodmanArgs = [
-          "--pod=portainer" # Use the same pod if desired
+          "--pod=portainer" #TODO: Use another pod
           "--group-add=keep-groups"
         ];
       };
+    };
+
+    jellyfin = {
+      image = "docker.io/jellyfin/jellyfin:latest";
+      autoStart = true;
+      autoUpdate = "registry";
+
+      # Persistent configuration and media directories
+      volumes = [
+        "/home/podman/jellyfin/config:/config"
+        "/home/podman/jellyfin/cache:/cache"
+        "/home/podman/jellyfin/media:/media"
+      ];
+
+      environment = {
+        TZ = "Australia/Sydney"; # adjust to your timezone
+        JELLYFIN_PublishedServerUrl = "http://your-server-ip:8096";
+      };
+
+      # Create or join a separate pod
+      extraPodmanArgs = [
+        "--pod=new:jellyfin"
+        "-p=8096:8096/tcp" # Web interface
+        "-p=8920:8920/tcp" # Optional HTTPS interface
+        "--group-add=keep-groups"
+      ];
     };
   };
 }
