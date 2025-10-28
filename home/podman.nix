@@ -30,7 +30,8 @@
             --userns=host \
             -p 9443:9443/tcp \
             -p 9000:9000/tcp \
-            -p 8000:8000/tcp
+            -p 8000:8000/tcp \
+            -p 25565:25565/tcp
         ''
       ];
       ExecStart = "${pkgs.podman}/bin/podman pod start portainer";
