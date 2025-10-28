@@ -4,10 +4,10 @@
             "formatting.command": [
                 "alejandra"
             ],
-            "options": {
-                "nixos.expr": "(builtins.getFlake \"github:TylerMG2/nixos-server-config?ref=main\").nixosConfigurations.home-server.options",
-                "home-manager.expr": "(builtins.getFlake \"github:TylerMG2/nixos-server-config?ref=main\").homeConfigurations.podman.options"
-            }
+            // "options": {
+            //     "nixos.expr": "(builtins.getFlake \"github:TylerMG2/nixos-server-config?ref=main\").nixosConfigurations.home-server.options",
+            //     "home-manager.expr": "(builtins.getFlake \"github:TylerMG2/nixos-server-config?ref=main\").homeConfigurations.podman.options"
+            // }
         }
     }
 }

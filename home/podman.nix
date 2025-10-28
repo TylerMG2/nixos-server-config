@@ -64,29 +64,29 @@
       };
 
       # Minecraft server container
-    minecraft = {
-      image = "itzg/minecraft-server:latest";
-      autoStart = true;
-      autoUpdate = "registry";
+      minecraft = {
+        image = "itzg/minecraft-server:latest";
+        autoStart = true;
+        autoUpdate = "registry";
 
-      # Map the standard Minecraft port
-      ports = [ "25565:25565/tcp" ];
+        # Map the standard Minecraft port
+        ports = ["25565:25565/tcp"];
 
-      # Volumes for persistent data
-      volumes = [
-        "/home/podman/minecraft:/data"
-      ];
+        # Volumes for persistent data
+        volumes = [
+          "/home/podman/minecraft:/data"
+        ];
 
-      environment = {
-        EULA = "TRUE";             # Accept the Minecraft EULA
-        MEMORY = "2G";             # Allocate 2 GB RAM
+        environment = {
+          EULA = "TRUE"; # Accept the Minecraft EULA
+          MEMORY = "2G"; # Allocate 2 GB RAM
+        };
+
+        extraPodmanArgs = [
+          "--pod=portainer" # Use the same pod if desired
+          "--group-add=keep-groups"
+        ];
       };
-
-      extraPodmanArgs = [
-        "--pod=portainer"           # Use the same pod if desired
-        "--group-add=keep-groups"
-      ];
-    };
     };
   };
 }

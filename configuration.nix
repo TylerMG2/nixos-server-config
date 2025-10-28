@@ -11,7 +11,7 @@
 
   # Enable flakes
   nix.settings = {
-    experimental-features = [ "nix-command" "flakes" ];
+    experimental-features = ["nix-command" "flakes"];
   };
 
   # Bootloader
@@ -96,6 +96,7 @@
     group = "podman";
     uid = 993;
     linger = true;
+    shell = pkgs.bash; #TODO: Remove later
   };
 
   users.groups.podman = {
@@ -128,6 +129,6 @@
   systemd.tmpfiles.rules = [
     ''d /home/podman/portainer 0750 podman podman''
   ];
- 
+
   system.stateVersion = "25.05";
 }
