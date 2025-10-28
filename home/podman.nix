@@ -43,23 +43,50 @@
     enable = true;
     autoUpdate.enable = true;
 
-    containers.portainer = {
-      image = "docker.io/portainer/portainer-ce:latest";
+    containers = {
+      portainer = {
+        image = "docker.io/portainer/portainer-ce:latest";
+        autoStart = true;
+        autoUpdate = "registry";
+
+        # We'll mount volumes but ignore ports for now
+        volumes = [
+          "/home/podman/portainer:/data"
+          # Rootless Podman socket path:
+          "/run/user/${toString podmanUID}/podman/podman.sock:/var/run/docker.sock"
+        ];
+
+        # Keep group mappings
+        extraPodmanArgs = [
+          "--pod=portainer"
+          "--group-add=keep-groups"
+        ];
+      };
+
+      # Minecraft server container
+    minecraft = {
+      image = "itzg/minecraft-server:latest";
       autoStart = true;
       autoUpdate = "registry";
 
-      # We'll mount volumes but ignore ports for now
+      # Map the standard Minecraft port
+      ports = [ "25565:25565/tcp" ];
+
+      # Volumes for persistent data
       volumes = [
-        "/home/podman/portainer:/data"
-        # Rootless Podman socket path:
-        "/run/user/${toString podmanUID}/podman/podman.sock:/var/run/docker.sock"
+        "/home/podman/minecraft:/data"
       ];
 
-      # Keep group mappings
+      environment = {
+        EULA = "TRUE";             # Accept the Minecraft EULA
+        MEMORY = "2G";             # Allocate 2 GB RAM
+      };
+
       extraPodmanArgs = [
-        "--pod=portainer"
+        "--pod=portainer"           # Use the same pod if desired
         "--group-add=keep-groups"
       ];
+    };
     };
   };
 }
