@@ -88,8 +88,8 @@
   #TODO: Move out
   # Docker + Portainer Setup
   users.users.podman = {
-    isSystemUser = true;
-    isNormalUser = false;
+    isSystemUser = false;
+    isNormalUser = true;
     description = "Podman user";
     home = "/home/podman";
     createHome = true;
@@ -99,15 +99,15 @@
     shell = pkgs.bash; #TODO: Remove later
   };
 
-  # /etc/subuid
-  environment.etc."subuid".text = ''
-    podman:100000:65536
-  '';
+  # # /etc/subuid
+  # environment.etc."subuid".text = ''
+  #   podman:100000:65536
+  # '';
 
-  # /etc/subgid
-  environment.etc."subgid".text = ''
-    podman:100000:65536
-  '';
+  # # /etc/subgid
+  # environment.etc."subgid".text = ''
+  #   podman:100000:65536
+  # '';
 
   users.groups.podman = {
     name = "podman";
