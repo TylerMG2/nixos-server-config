@@ -96,10 +96,16 @@
     group = "podman";
     uid = 993;
     linger = true;
-    extraSubuids = ["100000 65536"];
-    extraSubgids = ["100000 65536"];
     shell = pkgs.bash; #TODO: Remove later
   };
+
+  users.extraSubuids = [
+    "podman:100000:65536"
+  ];
+
+  users.extraSubgids = [
+    "podman:100000:65536"
+  ];
 
   users.groups.podman = {
     name = "podman";
