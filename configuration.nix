@@ -92,6 +92,7 @@
       25565 # Minecraft game port
       25575 # RCON (optional)
     ];
+    allowedUDPPorts = [51820]; # Wireguard
   };
 
   #TODO: Move out
@@ -136,6 +137,21 @@
     ''d /home/podman/jellyfin/cache 0750 podman podman -''
     ''d /home/podman/jellyfin/media 0750 podman podman -''
   ];
+
+  # Wireguard VPN for connecting to services
+  networking.wireguard.interfaces.wg0 = {
+    ips = ["10.100.0.1/24"];
+    listenPort = 51810;
+    privateKeyFile = "/etc/nixos/wireguard/privatekey";
+
+    # The peer (client)
+    peers = [
+      {
+        publicKey = "0YAk4+GXspOXWIYS7Bi9EZU1BydKY3NA4kGw5PjUnyk=";
+        allowedIPs = ["10.100.0.2/32"];
+      }
+    ];
+  };
 
   system.stateVersion = "25.05";
 }
