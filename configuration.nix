@@ -85,12 +85,7 @@
     # TODO: Setup nginx proxy
     allowedTCPPorts = [
       22 # SSH
-      8096 # Jellyfin http
-      8920 # Jellyfin HTTPS
-      #9443 # Portainer HTTPS
-      9000 # Portainer HTTP
       25565 # Minecraft game port
-      25575 # RCON (optional)
     ];
     allowedUDPPorts = [51810]; # Wireguard
   };
@@ -146,9 +141,15 @@
 
     # The peer (client)
     peers = [
+      # Phone
       {
         publicKey = "0YAk4+GXspOXWIYS7Bi9EZU1BydKY3NA4kGw5PjUnyk=";
         allowedIPs = ["10.100.0.2/32"];
+      }
+      # Desktop
+      {
+        publicKey = "+4Ghklg+ZBna+yym0vbh0b4yC2w9XTnhdFLdIL9bVSo=";
+        allowedIPs = ["10.100.0.3/32"];
       }
     ];
   };
