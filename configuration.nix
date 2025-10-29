@@ -85,13 +85,20 @@
     # TODO: Setup nginx proxy
     allowedTCPPorts = [
       22 # SSH
-      8096 # Jellyfin http
-      8920 # Jellyfin HTTPS
-      9443 # Portainer HTTPS
-      9000 # Portainer HTTP
       25565 # Minecraft game port
     ];
     allowedUDPPorts = [51810]; # Wireguard
+    extraCommands = ''
+      # Allow Jellyfin only from VPN & LAN
+      iptables -A INPUT -p tcp -m tcp --dport 8096 -s 10.100.0.0/24 -j ACCEPT
+      iptables -A INPUT -p tcp -m tcp --dport 8096 -s 192.168.0.0/24 -j ACCEPT
+      iptables -A INPUT -p tcp --dport 8096 -j DROP
+
+      # Allow Portainer only from VPN & LAN
+      iptables -A INPUT -p tcp -m tcp --dport 9000 -s 10.100.0.0/24 -j ACCEPT
+      iptables -A INPUT -p tcp -m tcp --dport 9000 -s 192.168.0.0/24 -j ACCEPT
+      iptables -A INPUT -p tcp --dport 9000 -j DROP
+    '';
   };
 
   #TODO: Move out
