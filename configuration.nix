@@ -87,7 +87,7 @@
       22 # SSH
       8096 # Jellyfin http
       8920 # Jellyfin HTTPS
-      9443 # Portainer HTTPS
+      #9443 # Portainer HTTPS
       9000 # Portainer HTTP
       25565 # Minecraft game port
       25575 # RCON (optional)
@@ -96,7 +96,7 @@
   };
 
   #TODO: Move out
-  # Docker + Portainer Setup
+  # Podman + Portainer Setup
   users.users.podman = {
     isSystemUser = false;
     isNormalUser = true;
