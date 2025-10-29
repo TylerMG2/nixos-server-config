@@ -92,7 +92,7 @@
       25565 # Minecraft game port
       25575 # RCON (optional)
     ];
-    allowedUDPPorts = [51820]; # Wireguard
+    allowedUDPPorts = [51810]; # Wireguard
   };
 
   #TODO: Move out
