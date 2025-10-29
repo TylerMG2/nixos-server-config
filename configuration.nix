@@ -73,7 +73,6 @@
   # Enable the OpenSSH daemon. TODO: Remove root login and password login
   services.openssh = {
     enable = true;
-    openFirewall = true;
   };
 
   # Vscode server
@@ -108,16 +107,6 @@
     shell = pkgs.bash; #TODO: Remove later
   };
 
-  # # /etc/subuid
-  # environment.etc."subuid".text = ''
-  #   podman:100000:65536
-  # '';
-
-  # # /etc/subgid
-  # environment.etc."subgid".text = ''
-  #   podman:100000:65536
-  # '';
-
   users.groups.podman = {
     name = "podman";
     gid = 1201;
@@ -132,15 +121,6 @@
       autoPrune.enable = true;
       dockerCompat = true;
       defaultNetwork.settings.dns_enabled = true;
-    };
-
-    containers.storage.settings = {
-      storage = {
-        driver = "btrfs";
-        runroot = "/run/containers/storage";
-        graphroot = "/var/lib/containers/storage";
-        options.overlay.mountopt = "nodev,metacopy=on";
-      };
     };
   };
 
