@@ -88,6 +88,8 @@
       25565 # Minecraft game port
     ];
     allowedUDPPorts = [51810]; # Wireguard
+
+    #TODO: Maybe these should only be accessible from vpn?
     extraCommands = ''
       # Allow Jellyfin only from VPN & LAN
       iptables -A INPUT -p tcp -m tcp --dport 8096 -s 10.100.0.0/24 -j ACCEPT
@@ -98,6 +100,26 @@
       iptables -A INPUT -p tcp -m tcp --dport 9000 -s 10.100.0.0/24 -j ACCEPT
       iptables -A INPUT -p tcp -m tcp --dport 9000 -s 192.168.0.0/24 -j ACCEPT
       iptables -A INPUT -p tcp --dport 9000 -j DROP
+
+      # Allow Sonarr only from VPN & LAN
+      iptables -A INPUT -p tcp -m tcp --dport 8989 -s 10.100.0.0/24 -j ACCEPT
+      iptables -A INPUT -p tcp -m tcp --dport 8989 -s 192.168.0.0/24 -j ACCEPT
+      iptables -A INPUT -p tcp --dport 8989 -j DROP
+
+      # Allow Radarr only from VPN & LAN
+      iptables -A INPUT -p tcp -m tcp --dport 7878 -s 10.100.0.0/24 -j ACCEPT
+      iptables -A INPUT -p tcp -m tcp --dport 7878 -s 192.168.0.0/24 -j ACCEPT
+      iptables -A INPUT -p tcp --dport 7878 -j DROP
+
+      # Allow Lidarr only from VPN & LAN
+      iptables -A INPUT -p tcp -m tcp --dport 8686 -s 10.100.0.0/24 -j ACCEPT
+      iptables -A INPUT -p tcp -m tcp --dport 8686 -s 192.168.0.0/24 -j ACCEPT
+      iptables -A INPUT -p tcp --dport 8686 -j DROP
+
+      # Allow Prowlarr only from VPN & LAN
+      iptables -A INPUT -p tcp -m tcp --dport 9696 -s 10.100.0.0/24 -j ACCEPT
+      iptables -A INPUT -p tcp -m tcp --dport 9696 -s 192.168.0.0/24 -j ACCEPT
+      iptables -A INPUT -p tcp --dport 9696 -j DROP
     '';
   };
 
@@ -142,6 +164,11 @@
     ''d /home/podman/jellyfin/config 0750 podman podman -''
     ''d /home/podman/jellyfin/cache 0750 podman podman -''
     ''d /home/podman/jellyfin/media 0750 podman podman -''
+
+    ''d /home/podman/sonarr/config 0750 podman podman -''
+    ''d /home/podman/radarr/config 0750 podman podman -''
+    ''d /home/podman/lidarr/config 0750 podman podman -''
+    ''d /home/podman/prowlarr/config 0750 podman podman -''
   ];
 
   # Wireguard VPN for connecting to services

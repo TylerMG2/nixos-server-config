@@ -68,6 +68,36 @@
     };
   };
 
+  # Media providers pod
+  systemd.user.services.pod-media = {
+    Unit = {
+      Description = "Rootless Podman Media Pod (Sonarr, Radarr, Lidarr, Prowlarr)";
+      Wants = ["network-online.target"];
+      After = ["network-online.target"];
+    };
+    Install = {
+      WantedBy = ["default.target"];
+    };
+    Service = {
+      Type = "forking";
+      ExecStartPre = [
+        "${pkgs.coreutils}/bin/sleep 2s"
+        ''
+          ${pkgs.podman}/bin/podman pod create --replace \
+            --name media \
+            --userns=host \
+            -p 8989:8989/tcp \   # Sonarr
+            -p 7878:7878/tcp \   # Radarr
+            -p 8686:8686/tcp \   # Lidarr
+            -p 9696:9696/tcp     # Prowlarr
+        ''
+      ];
+      ExecStart = "${pkgs.podman}/bin/podman pod start media";
+      ExecStop = "${pkgs.podman}/bin/podman pod stop media";
+      RestartSec = "1s";
+    };
+  };
+
   services.podman = {
     enable = true;
     autoUpdate.enable = true;
@@ -135,6 +165,87 @@
         # Create or join a separate pod
         extraPodmanArgs = [
           "--pod=jellyfin"
+          "--group-add=keep-groups"
+        ];
+      };
+
+      sonarr = {
+        image = "lscr.io/linuxserver/sonarr:latest";
+        autoStart = true;
+        autoUpdate = "registry";
+        volumes = [
+          "/home/podman/sonarr/config:/config"
+          "/home/podman/jellyfin/media/tv:/tv"
+          "/home/podman/jellyfin/media/downloads:/downloads"
+        ];
+        environment = {
+          PUID = "${toString podmanUID}";
+          PGID = "${toString podmanUID}";
+          TZ = "Australia/Melbourne";
+        };
+        extraPodmanArgs = [
+          "--pod=media"
+          "--group-add=keep-groups"
+        ];
+      };
+
+      radarr = {
+        image = "lscr.io/linuxserver/radarr:latest";
+        autoStart = true;
+        autoUpdate = "registry";
+        volumes = [
+          "/home/podman/radarr/config:/config"
+          "/home/podman/jellyfin/media/movies:/movies"
+          "/home/podman/jellyfin/media/downloads:/downloads"
+        ];
+        environment = {
+          PUID = "${toString podmanUID}";
+          PGID = "${toString podmanUID}";
+          TZ = "Australia/Melbourne";
+        };
+        extraPodmanArgs = [
+          "--pod=media"
+          "--group-add=keep-groups"
+        ];
+      };
+
+      lidarr = {
+        image = "lscr.io/linuxserver/lidarr:latest";
+        autoStart = true;
+        autoUpdate = "registry";
+        volumes = [
+          "/home/podman/lidarr/config:/config"
+          "/home/podman/jellyfin/media/music:/music"
+          "/home/podman/jellyfin/media/downloads:/downloads"
+        ];
+        environment = {
+          PUID = "${toString podmanUID}";
+          PGID = "${toString podmanUID}";
+          TZ = "Australia/Melbourne";
+        };
+        extraPodmanArgs = [
+          "--pod=media"
+          "--group-add=keep-groups"
+        ];
+      };
+
+      prowlarr = {
+        image = "lscr.io/linuxserver/prowlarr:latest";
+        autoStart = true;
+        autoUpdate = "registry";
+
+        volumes = [
+          "/home/podman/prowlarr/config:/config"
+        ];
+
+        environment = {
+          PUID = "${toString podmanUID}";
+          PGID = "${toString podmanUID}";
+          TZ = "Australia/Melbourne";
+        };
+
+        extraPodmanArgs = [
+          "--pod=media"
           "--group-add=keep-groups"
         ];
       };
