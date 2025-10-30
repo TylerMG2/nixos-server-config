@@ -162,25 +162,25 @@
         ];
       };
 
-      # sonarr = {
-      #   image = "lscr.io/linuxserver/sonarr:latest";
-      #   autoStart = true;
-      #   autoUpdate = "registry";
-      #   volumes = [
-      #     "/home/podman/sonarr/config:/config"
-      #     "/home/podman/jellyfin/media/tv:/tv"
-      #     "/home/podman/jellyfin/media/downloads:/downloads"
-      #   ];
-      #   environment = {
-      #     PUID = "${toString podmanUID}";
-      #     PGID = "${toString podmanUID}";
-      #     TZ = "Australia/Melbourne";
-      #   };
-      #   extraPodmanArgs = [
-      #     "--pod=media"
-      #     "--group-add=keep-groups"
-      #   ];
-      # };
+      sonarr = {
+        image = "lscr.io/linuxserver/sonarr:latest";
+        autoStart = true;
+        autoUpdate = "registry";
+        volumes = [
+          "/home/podman/sonarr/config:/config"
+          "/home/podman/jellyfin/media/tv:/tv"
+          "/home/podman/jellyfin/media/downloads:/downloads"
+        ];
+        environment = {
+          PUID = "${toString podmanUID}";
+          PGID = "${toString podmanUID}";
+          TZ = "Australia/Melbourne";
+        };
+        extraPodmanArgs = [
+          "--pod=media"
+          "--group-add=keep-groups"
+        ];
+      };
 
       # radarr = {
       #   image = "lscr.io/linuxserver/radarr:latest";
