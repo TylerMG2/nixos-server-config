@@ -238,7 +238,7 @@
         };
 
         extraPodmanArgs = [
-          "--pod=media"
+          # "--pod=media"
           "--group-add=keep-groups"
         ];
       };
