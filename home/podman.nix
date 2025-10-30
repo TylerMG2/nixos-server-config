@@ -182,66 +182,66 @@
         ];
       };
 
-      # radarr = {
-      #   image = "lscr.io/linuxserver/radarr:latest";
-      #   autoStart = true;
-      #   autoUpdate = "registry";
-      #   volumes = [
-      #     "/home/podman/radarr/config:/config"
-      #     "/home/podman/jellyfin/media/movies:/movies"
-      #     "/home/podman/jellyfin/media/downloads:/downloads"
-      #   ];
-      #   environment = {
-      #     PUID = "${toString podmanUID}";
-      #     PGID = "${toString podmanUID}";
-      #     TZ = "Australia/Melbourne";
-      #   };
-      #   extraPodmanArgs = [
-      #     "--pod=media"
-      #     "--group-add=keep-groups"
-      #   ];
-      # };
+      radarr = {
+        image = "lscr.io/linuxserver/radarr:latest";
+        autoStart = true;
+        autoUpdate = "registry";
+        volumes = [
+          "/home/podman/radarr/config:/config"
+          "/home/podman/jellyfin/media/movies:/movies"
+          "/home/podman/jellyfin/media/downloads:/downloads"
+        ];
+        environment = {
+          PUID = "${toString podmanUID}";
+          PGID = "${toString podmanUID}";
+          TZ = "Australia/Melbourne";
+        };
+        extraPodmanArgs = [
+          "--pod=media"
+          "--group-add=keep-groups"
+        ];
+      };
 
-      # lidarr = {
-      #   image = "lscr.io/linuxserver/lidarr:latest";
-      #   autoStart = true;
-      #   autoUpdate = "registry";
-      #   volumes = [
-      #     "/home/podman/lidarr/config:/config"
-      #     "/home/podman/jellyfin/media/music:/music"
-      #     "/home/podman/jellyfin/media/downloads:/downloads"
-      #   ];
-      #   environment = {
-      #     PUID = "${toString podmanUID}";
-      #     PGID = "${toString podmanUID}";
-      #     TZ = "Australia/Melbourne";
-      #   };
-      #   extraPodmanArgs = [
-      #     "--pod=media"
-      #     "--group-add=keep-groups"
-      #   ];
-      # };
+      lidarr = {
+        image = "lscr.io/linuxserver/lidarr:latest";
+        autoStart = true;
+        autoUpdate = "registry";
+        volumes = [
+          "/home/podman/lidarr/config:/config"
+          "/home/podman/jellyfin/media/music:/music"
+          "/home/podman/jellyfin/media/downloads:/downloads"
+        ];
+        environment = {
+          PUID = "${toString podmanUID}";
+          PGID = "${toString podmanUID}";
+          TZ = "Australia/Melbourne";
+        };
+        extraPodmanArgs = [
+          "--pod=media"
+          "--group-add=keep-groups"
+        ];
+      };
 
-      # prowlarr = {
-      #   image = "lscr.io/linuxserver/prowlarr:latest";
-      #   autoStart = true;
-      #   autoUpdate = "registry";
+      prowlarr = {
+        image = "lscr.io/linuxserver/prowlarr:latest";
+        autoStart = true;
+        autoUpdate = "registry";
 
-      #   volumes = [
-      #     "/home/podman/prowlarr/config:/config"
-      #   ];
+        volumes = [
+          "/home/podman/prowlarr/config:/config"
+        ];
 
-      #   environment = {
-      #     PUID = "${toString podmanUID}";
-      #     PGID = "${toString podmanUID}";
-      #     TZ = "Australia/Melbourne";
-      #   };
+        environment = {
+          PUID = "${toString podmanUID}";
+          PGID = "${toString podmanUID}";
+          TZ = "Australia/Melbourne";
+        };
 
-      #   extraPodmanArgs = [
-      #     # "--pod=media"
-      #     "--group-add=keep-groups"
-      #   ];
-      # };
+        extraPodmanArgs = [
+          # "--pod=media"
+          "--group-add=keep-groups"
+        ];
+      };
     };
   };
 }
