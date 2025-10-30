@@ -108,14 +108,11 @@
         autoStart = true;
         autoUpdate = "registry";
 
-        # We'll mount volumes but ignore ports for now
         volumes = [
           "/home/podman/portainer:/data"
-          # Rootless Podman socket path:
           "/run/user/${toString podmanUID}/podman/podman.sock:/var/run/docker.sock"
         ];
 
-        # Keep group mappings
         extraPodmanArgs = [
           "--pod=portainer"
           "--group-add=keep-groups"
@@ -128,15 +125,13 @@
         autoStart = true;
         autoUpdate = "registry";
 
-        # Volumes for persistent data
         volumes = [
           "/home/podman/minecraft:/data"
         ];
 
         environment = {
-          EULA = "TRUE"; # Accept the Minecraft EULA
-          MEMORY = "2G"; # Allocate 2 GB RAM
-          TESTING = "123";
+          EULA = "TRUE";
+          MEMORY = "2G";
         };
 
         extraPodmanArgs = [
@@ -150,7 +145,6 @@
         autoStart = true;
         autoUpdate = "registry";
 
-        # Persistent configuration and media directories
         volumes = [
           "/home/podman/jellyfin/config:/config"
           "/home/podman/jellyfin/cache:/cache"
@@ -158,11 +152,10 @@
         ];
 
         environment = {
-          TZ = "Australia/Melbourne"; # adjust to your timezone
+          TZ = "Australia/Melbourne";
           JELLYFIN_PublishedServerUrl = "http://your-server-ip:8096";
         };
 
-        # Create or join a separate pod
         extraPodmanArgs = [
           "--pod=jellyfin"
           "--group-add=keep-groups"

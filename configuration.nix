@@ -134,7 +134,21 @@
     group = "podman";
     uid = 1200;
     linger = true;
-    shell = pkgs.bash; #TODO: Remove later
+    shell = pkgs.bash; #TODO: Remove later\
+
+    # Stop podman running out of mappings
+    subUidRanges = [
+      {
+        start = 100000;
+        count = 65536;
+      }
+    ];
+    subGidRanges = [
+      {
+        start = 100000;
+        count = 65536;
+      }
+    ];
   };
 
   users.groups.podman = {
