@@ -69,34 +69,34 @@
   };
 
   # Media providers pod
-  # systemd.user.services.pod-media = {
-  #   Unit = {
-  #     Description = "Rootless Podman Media Pod (Sonarr, Radarr, Lidarr, Prowlarr)";
-  #     Wants = ["network-online.target"];
-  #     After = ["network-online.target"];
-  #   };
-  #   Install = {
-  #     WantedBy = ["default.target"];
-  #   };
-  #   Service = {
-  #     Type = "forking";
-  #     ExecStartPre = [
-  #       "${pkgs.coreutils}/bin/sleep 2s"
-  #       ''
-  #         ${pkgs.podman}/bin/podman pod create --replace \
-  #           --name media \
-  #           --userns=host \
-  #           -p 8989:8989/tcp \
-  #           -p 7878:7878/tcp \
-  #           -p 8686:8686/tcp \
-  #           -p 9696:9696/tcp
-  #       ''
-  #     ];
-  #     ExecStart = "${pkgs.podman}/bin/podman pod start media";
-  #     ExecStop = "${pkgs.podman}/bin/podman pod stop media";
-  #     RestartSec = "1s";
-  #   };
-  # };
+  systemd.user.services.pod-media = {
+    Unit = {
+      Description = "Rootless Podman Media Pod (Sonarr, Radarr, Lidarr, Prowlarr)";
+      Wants = ["network-online.target"];
+      After = ["network-online.target"];
+    };
+    Install = {
+      WantedBy = ["default.target"];
+    };
+    Service = {
+      Type = "forking";
+      ExecStartPre = [
+        "${pkgs.coreutils}/bin/sleep 2s"
+        ''
+          ${pkgs.podman}/bin/podman pod create --replace \
+            --name media \
+            --userns=host \
+            -p 8989:8989/tcp \
+            -p 7878:7878/tcp \
+            -p 8686:8686/tcp \
+            -p 9696:9696/tcp
+        ''
+      ];
+      ExecStart = "${pkgs.podman}/bin/podman pod start media";
+      ExecStop = "${pkgs.podman}/bin/podman pod stop media";
+      RestartSec = "1s";
+    };
+  };
 
   services.podman = {
     enable = true;
