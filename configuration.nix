@@ -139,13 +139,13 @@
     # Stop podman running out of mappings
     subUidRanges = [
       {
-        start = 100000;
+        startUid = 100000;
         count = 65536;
       }
     ];
     subGidRanges = [
       {
-        start = 100000;
+        startGid = 100000;
         count = 65536;
       }
     ];
