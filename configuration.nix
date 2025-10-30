@@ -179,6 +179,9 @@
     ''d /home/podman/jellyfin/cache 0750 podman podman -''
     ''d /home/podman/jellyfin/media 0750 podman podman -''
     ''d /home/podman/jellyfin/media/downloads 0750 podman podman -''
+    ''d /home/podman/jellyfin/media/music 0750 podman podman -''
+    ''d /home/podman/jellyfin/media/movies 0750 podman podman -''
+    ''d /home/podman/jellyfin/media/tv 0750 podman podman -''
 
     ''d /home/podman/sonarr 0750 podman podman -''
     ''d /home/podman/sonarr/config 0750 podman podman -''
