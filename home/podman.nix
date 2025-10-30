@@ -86,10 +86,10 @@
           ${pkgs.podman}/bin/podman pod create --replace \
             --name media \
             --userns=host \
-            -p 8989:8989/tcp \   # Sonarr
-            -p 7878:7878/tcp \   # Radarr
-            -p 8686:8686/tcp \   # Lidarr
-            -p 9696:9696/tcp     # Prowlarr
+            -p 8989:8989/tcp \
+            -p 7878:7878/tcp \
+            -p 8686:8686/tcp \
+            -p 9696:9696/tcp
         ''
       ];
       ExecStart = "${pkgs.podman}/bin/podman pod start media";
