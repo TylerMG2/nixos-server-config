@@ -137,18 +137,18 @@
     shell = pkgs.bash; #TODO: Remove later\
 
     # Stop podman running out of mappings
-    # subUidRanges = [
-    #   {
-    #     startUid = 100000;
-    #     count = 65536;
-    #   }
-    # ];
-    # subGidRanges = [
-    #   {
-    #     startGid = 100000;
-    #     count = 65536;
-    #   }
-    # ];
+    subUidRanges = [
+      {
+        startUid = 100000;
+        count = 65536;
+      }
+    ];
+    subGidRanges = [
+      {
+        startGid = 100000;
+        count = 65536;
+      }
+    ];
   };
 
   users.groups.podman = {
@@ -178,10 +178,18 @@
     ''d /home/podman/jellyfin/config 0750 podman podman -''
     ''d /home/podman/jellyfin/cache 0750 podman podman -''
     ''d /home/podman/jellyfin/media 0750 podman podman -''
+    ''d /home/podman/jellyfin/media/downloads 0750 podman podman -''
 
+    ''d /home/podman/sonarr 0750 podman podman -''
     ''d /home/podman/sonarr/config 0750 podman podman -''
+
+    ''d /home/podman/radarr 0750 podman podman -''
     ''d /home/podman/radarr/config 0750 podman podman -''
+
+    ''d /home/podman/lidarr 0750 podman podman -''
     ''d /home/podman/lidarr/config 0750 podman podman -''
+
+    ''d /home/podman/prowlarr 0750 podman podman -''
     ''d /home/podman/prowlarr/config 0750 podman podman -''
   ];
 
