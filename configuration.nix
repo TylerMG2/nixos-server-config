@@ -200,15 +200,10 @@
     ''d /home/podman/jellyfin/media/tv 0750 podman podman -''
 
     ''d /home/podman/sonarr 0750 podman podman -''
-    ''d /home/podman/sonarr/config 0750 podman podman -''
-
     ''d /home/podman/radarr 0750 podman podman -''
-    ''d /home/podman/radarr/config 0750 podman podman -''
-
     ''d /home/podman/lidarr 0750 podman podman -''
 
     ''d /home/podman/prowlarr 0750 podman podman -''
-    ''d /home/podman/prowlarr/config 0750 podman podman -''
   ];
 
   # Wireguard VPN for connecting to services

@@ -231,7 +231,7 @@
         autoUpdate = "registry";
 
         volumes = [
-          "/home/podman/prowlarr/config:/config"
+          "/home/podman/prowlarr:/config:Z"
         ];
 
         environment = {
@@ -275,7 +275,7 @@
         autoStart = true;
         autoUpdate = "registry";
         volumes = [
-          "/home/podman/sonarr/config:/config"
+          "/home/podman/sonarr:/config:Z"
           "/home/podman/jellyfin/media/tv:/tv"
           "/home/podman/jellyfin/media/downloads:/downloads"
         ];
@@ -295,7 +295,7 @@
         autoStart = true;
         autoUpdate = "registry";
         volumes = [
-          "/home/podman/radarr/config:/config"
+          "/home/podman/radarr:/config:Z"
           "/home/podman/jellyfin/media/movies:/movies"
           "/home/podman/jellyfin/media/downloads:/downloads"
         ];
