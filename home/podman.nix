@@ -218,6 +218,8 @@
         extraPodmanArgs = [
           "--pod=vpn"
           "--group-add=keep-groups"
+          "--network=container:gluetun"
+          "--requires=gluetun"
         ];
       };
 
