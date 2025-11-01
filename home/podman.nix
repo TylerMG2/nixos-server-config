@@ -315,7 +315,7 @@
         autoStart = true;
         autoUpdate = "registry";
         volumes = [
-          "/home/podman/lidarr/config:/config"
+          "/home/podman/lidarr/config:/config:Z,U"
           "/home/podman/jellyfin/media/music:/music"
           "/home/podman/jellyfin/media/downloads:/downloads"
         ];
