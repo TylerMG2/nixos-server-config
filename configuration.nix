@@ -75,7 +75,9 @@
   # Enable the OpenSSH daemon. TODO: Remove password login
   services.openssh = {
     enable = true;
-    permitRootLogin = "no";
+    settings = {
+      permitRootLogin = "no";
+    };
   };
 
   # Vscode server
