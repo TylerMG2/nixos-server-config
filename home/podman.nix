@@ -165,20 +165,17 @@
         autoUpdate = "registry";
 
         volumes = [
-          "/home/podman/minecraft:/data:Z,U"
+          "/home/podman/minecraft:/data:Z"
         ];
 
         environment = {
           EULA = "TRUE";
           MEMORY = "2G";
-          PUID = "${toString podmanUID}";
-          PGID = "1201"; #TODO Replace with variable alongside all below
         };
 
         extraPodmanArgs = [
           "--pod=portainer" #TODO: Use another pod
           "--group-add=keep-groups"
-          "--userns=keep-id"
         ];
       };
 
