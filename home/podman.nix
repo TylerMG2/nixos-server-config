@@ -159,27 +159,27 @@
       };
 
       # Minecraft server container
-      # minecraft = {
-      #   image = "docker.io/itzg/minecraft-server:latest";
-      #   autoStart = true;
-      #   autoUpdate = "registry";
+      minecraft = {
+        image = "docker.io/itzg/minecraft-server:latest";
+        autoStart = true;
+        autoUpdate = "registry";
 
-      #   volumes = [
-      #     "/home/podman/minecraft:/data:Z,U"
-      #   ];
+        volumes = [
+          "/home/podman/minecraft:/data:Z,U"
+        ];
 
-      #   environment = {
-      #     EULA = "TRUE";
-      #     MEMORY = "2G";
-      #     PUID = "${toString podmanUID}";
-      #     PGID = "1201"; #TODO Replace with variable alongside all below
-      #   };
+        environment = {
+          EULA = "TRUE";
+          MEMORY = "2G";
+          PUID = "${toString podmanUID}";
+          PGID = "1201"; #TODO Replace with variable alongside all below
+        };
 
-      #   extraPodmanArgs = [
-      #     "--pod=portainer" #TODO: Use another pod
-      #     "--group-add=keep-groups"
-      #   ];
-      # };
+        extraPodmanArgs = [
+          "--pod=portainer" #TODO: Use another pod
+          "--group-add=keep-groups"
+        ];
+      };
 
       gluetun = {
         image = "docker.io/qmcgaw/gluetun:latest";
