@@ -174,7 +174,7 @@
     ''d /home/podman/portainer 0750 podman podman -''
     ''d /home/podman/minecraft 0750 podman podman -''
 
-    ''d /home/podman/glueton 0750 podman podman -''
+    ''d /home/podman/gluetun 0750 podman podman -''
 
     ''d /home/podman/qbittorrent 0750 podman podman -''
     ''d /home/podman/media 0750 podman podman -''
