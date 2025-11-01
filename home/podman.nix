@@ -165,7 +165,7 @@
         autoUpdate = "registry";
 
         volumes = [
-          "/home/podman/minecraft:/data"
+          "/home/podman/minecraft:/data:Z"
         ];
 
         environment = {
