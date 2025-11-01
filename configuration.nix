@@ -205,9 +205,6 @@
     ''d /home/podman/radarr 0750 podman podman -''
     ''d /home/podman/radarr/config 0750 podman podman -''
 
-    ''d /home/podman/lidarr 0750 podman podman -''
-    ''d /home/podman/lidarr/config 0750 podman podman -''
-
     ''d /home/podman/prowlarr 0750 podman podman -''
     ''d /home/podman/prowlarr/config 0750 podman podman -''
   ];
