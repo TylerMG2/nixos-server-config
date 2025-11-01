@@ -190,7 +190,7 @@
           "--cap-add=NET_ADMIN"
           "--cap-add=NET_RAW"
           "--device=/dev/net/tun"
-          "--health-cmd='curl --fail http://localhost:8000/ || exit 1'"
+          "--health-cmd='wget --no-verbose --tries=1 --timeout=5 --spider http://localhost:8000/ || exit 1'"
           "--health-interval=20s"
           "--health-retries=5"
           "--health-timeout=10s"
