@@ -88,7 +88,8 @@
           ${pkgs.podman}/bin/podman pod create --replace \
             --name vpn \
             --userns=host \
-            -p 8080:8080/tcp
+            -p 8080:8080/tcp \
+            -p 9696:9696/tcp
         ''
       ];
       ExecStart = "${pkgs.podman}/bin/podman pod start vpn";
@@ -117,8 +118,7 @@
             --userns=host \
             -p 8989:8989/tcp \
             -p 7878:7878/tcp \
-            -p 8686:8686/tcp \
-            -p 9696:9696/tcp
+            -p 8686:8686/tcp
         ''
       ];
       ExecStart = "${pkgs.podman}/bin/podman pod start media";
@@ -184,7 +184,7 @@
         autoStart = true;
         autoUpdate = "registry";
         volumes = ["/home/podman/gluetun:/gluetun"];
-        environmentFile = ["/home/podman/gluetun.env"]; #TODO: Change
+        environmentFile = ["/home/podman/gluetun.env"]; #TODO: Move most of these here and look into sops for secrets
         extraPodmanArgs = [
           "--pod=vpn"
           "--cap-add=NET_ADMIN"
@@ -213,6 +213,29 @@
           PGID = "1201";
           UMASK_SET = "022";
           WEBUI_PORT = "8080";
+        };
+
+        extraPodmanArgs = [
+          "--pod=vpn"
+          "--group-add=keep-groups"
+          "--network=container:gluetun"
+          "--requires=gluetun"
+        ];
+      };
+
+      prowlarr = {
+        image = "lscr.io/linuxserver/prowlarr:latest";
+        autoStart = true;
+        autoUpdate = "registry";
+
+        volumes = [
+          "/home/podman/prowlarr/config:/config"
+        ];
+
+        environment = {
+          PUID = "${toString podmanUID}";
+          PGID = "${toString podmanUID}";
+          TZ = "Australia/Melbourne";
         };
 
         extraPodmanArgs = [
@@ -301,27 +324,6 @@
         };
         extraPodmanArgs = [
           "--pod=media"
-          "--group-add=keep-groups"
-        ];
-      };
-
-      prowlarr = {
-        image = "lscr.io/linuxserver/prowlarr:latest";
-        autoStart = true;
-        autoUpdate = "registry";
-
-        volumes = [
-          "/home/podman/prowlarr/config:/config"
-        ];
-
-        environment = {
-          PUID = "${toString podmanUID}";
-          PGID = "${toString podmanUID}";
-          TZ = "Australia/Melbourne";
-        };
-
-        extraPodmanArgs = [
-          #"--pod=media"
           "--group-add=keep-groups"
         ];
       };

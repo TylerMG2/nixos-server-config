@@ -51,7 +51,8 @@
   };
 
   # Define a user account
-  users.mutableUsers = true;
+  users.mutableUsers = true; #TODO: I think we can remove this
+  #TODO: Harden ssh
   users.users.tylerg = {
     isNormalUser = true;
     description = "Tyler Gwin";
@@ -71,9 +72,10 @@
     wireguard-tools
   ];
 
-  # Enable the OpenSSH daemon. TODO: Remove root login and password login
+  # Enable the OpenSSH daemon. TODO: Remove password login
   services.openssh = {
     enable = true;
+    permitRootLogin = false;
   };
 
   # Vscode server
