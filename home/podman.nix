@@ -136,7 +136,7 @@
         subnet = "10.88.5.0/24";
         gateway = "10.88.5.1";
         autoStart = true;
-        internal = true;
+        internal = false;
       };
     };
 
@@ -187,6 +187,7 @@
         extraPodmanArgs = [
           "--pod=vpn"
           "--cap-add=NET_ADMIN"
+          "--cap-add=NET_RAW"
           "--device=/dev/net/tun"
           # "--health-cmd=ping -c 1 www.google.com || exit 1"
           # "--health-interval=20s"
