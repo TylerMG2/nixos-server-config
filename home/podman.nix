@@ -171,6 +171,8 @@
         environment = {
           EULA = "TRUE";
           MEMORY = "2G";
+          PUID = "${toString podmanUID}";
+          PGID = "1201"; #TODO Replace with variable alongside all below
         };
 
         extraPodmanArgs = [
@@ -209,7 +211,7 @@
         ];
 
         environment = {
-          PUID = "1200";
+          PUID = "${toString podmanUID}";
           PGID = "1201";
           UMASK_SET = "022";
           WEBUI_PORT = "8080";
@@ -234,7 +236,7 @@
 
         environment = {
           PUID = "${toString podmanUID}";
-          PGID = "${toString podmanUID}";
+          PGID = "1201";
           TZ = "Australia/Melbourne";
         };
 
@@ -279,7 +281,7 @@
         ];
         environment = {
           PUID = "${toString podmanUID}";
-          PGID = "${toString podmanUID}";
+          PGID = "1201";
           TZ = "Australia/Melbourne";
         };
         extraPodmanArgs = [
@@ -299,7 +301,7 @@
         ];
         environment = {
           PUID = "${toString podmanUID}";
-          PGID = "${toString podmanUID}";
+          PGID = "1201";
           TZ = "Australia/Melbourne";
         };
         extraPodmanArgs = [
@@ -319,7 +321,7 @@
         ];
         environment = {
           PUID = "${toString podmanUID}";
-          PGID = "${toString podmanUID}";
+          PGID = "1201";
           TZ = "Australia/Melbourne";
         };
         extraPodmanArgs = [
