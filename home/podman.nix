@@ -70,6 +70,7 @@
 
   # VPN Pod
   #TODO: It's probably worth it to move this pod and its containers to a seperate user
+  #Then again, our portainer instance would no longer be able to see and manage these containers anymore
   systemd.user.services.pod-vpn = {
     Unit = {
       Description = "Rootless Podman VPN Pod for QBitTorrent";
@@ -189,9 +190,11 @@
           "--cap-add=NET_ADMIN"
           "--cap-add=NET_RAW"
           "--device=/dev/net/tun"
-          # "--health-cmd=ping -c 1 www.google.com || exit 1"
-          # "--health-interval=20s"
-          # "--health-retries=5"
+          "--health-cmd=curl -f http://localhost:8000/ || exit 1"
+          "--health-interval=20s"
+          "--health-retries=5"
+          "--health-timeout=10s"
+          "--health-start-period=30s"
         ];
       };
 

@@ -90,6 +90,7 @@
     allowedUDPPorts = [51810 51820]; # Wireguard
 
     #TODO: Maybe these should only be accessible from vpn?
+    # WireGuard VPN: 10.100.0.0/24, Local LAN: 192.168.0.0/24
     extraCommands = ''
       # Allow Jellyfin only from VPN & LAN
       iptables -A INPUT -p tcp -m tcp --dport 8096 -s 10.100.0.0/24 -j ACCEPT
@@ -100,6 +101,11 @@
       iptables -A INPUT -p tcp -m tcp --dport 9000 -s 10.100.0.0/24 -j ACCEPT
       iptables -A INPUT -p tcp -m tcp --dport 9000 -s 192.168.0.0/24 -j ACCEPT
       iptables -A INPUT -p tcp --dport 9000 -j DROP
+
+      # Allow QBitTorrent only from VPN & LAN
+      iptables -A INPUT -p tcp -m tcp --dport 8080 -s 10.100.0.0/24 -j ACCEPT
+      iptables -A INPUT -p tcp -m tcp --dport 8080 -s 192.168.0.0/24 -j ACCEPT
+      iptables -A INPUT -p tcp --dport 8080 -j DROP
 
       # Allow Sonarr only from VPN & LAN
       iptables -A INPUT -p tcp -m tcp --dport 8989 -s 10.100.0.0/24 -j ACCEPT
