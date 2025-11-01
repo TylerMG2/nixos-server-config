@@ -190,7 +190,7 @@
           "--cap-add=NET_ADMIN"
           "--cap-add=NET_RAW"
           "--device=/dev/net/tun"
-          "--health-cmd='wget --no-verbose --tries=1 --timeout=5 --spider http://www.google.com/ || exit 1'"
+          "--health-cmd='ping -c 1 -W 5 8.8.8.8 || exit 1'"
           "--health-interval=20s"
           "--health-retries=5"
           "--health-timeout=10s"
