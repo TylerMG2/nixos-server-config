@@ -190,7 +190,7 @@
           "--cap-add=NET_ADMIN"
           "--cap-add=NET_RAW"
           "--device=/dev/net/tun"
-          "--health-cmd=curl -f http://localhost:8000/ || exit 1"
+          "--health-cmd=[\"CMD\", \"curl\", \"-f\", \"http://localhost:8000/\"]"
           "--health-interval=20s"
           "--health-retries=5"
           "--health-timeout=10s"
