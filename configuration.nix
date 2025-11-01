@@ -87,7 +87,7 @@
       22 # SSH
       25565 # Minecraft game port
     ];
-    allowedUDPPorts = [51810]; # Wireguard
+    allowedUDPPorts = [51810 51820]; # Wireguard
 
     #TODO: Maybe these should only be accessible from vpn?
     extraCommands = ''
