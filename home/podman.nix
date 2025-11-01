@@ -213,7 +213,7 @@
 
         extraPodmanArgs = [
           "--pod=vpn"
-          "--restart=always"
+          "--group-add=keep-groups"
         ];
       };
 
