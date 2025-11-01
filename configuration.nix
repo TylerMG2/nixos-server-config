@@ -182,6 +182,7 @@
   # TODO: Maybe we can move this home configuration somehow
   systemd.tmpfiles.rules = [
     ''d /home/podman/portainer 0750 podman podman -''
+
     ''d /home/podman/minecraft 0750 podman podman -''
 
     ''d /home/podman/gluetun 0750 podman podman -''
