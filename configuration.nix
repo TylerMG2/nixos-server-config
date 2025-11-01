@@ -174,6 +174,12 @@
     ''d /home/podman/portainer 0750 podman podman -''
     ''d /home/podman/minecraft 0750 podman podman -''
 
+    ''d /home/podman/glueton 0750 podman podman -''
+
+    ''d /home/podman/qbittorrent 0750 podman podman -''
+    ''d /home/podman/media 0750 podman podman -''
+    ''d /home/podman/media/downloads 0750 podman podman -'' #TODO: Maybe this can go straight to jellyfin?
+
     ''d /home/podman/jellyfin 0750 podman podman -''
     ''d /home/podman/jellyfin/config 0750 podman podman -''
     ''d /home/podman/jellyfin/cache 0750 podman podman -''

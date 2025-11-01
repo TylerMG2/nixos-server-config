@@ -68,6 +68,33 @@
     };
   };
 
+  # VPN Pod
+  systemd.user.services.pod-vpn = {
+    Unit = {
+      Description = "Rootless Podman VPN Pod for QBitTorrent";
+      Wants = ["network-online.target"];
+      After = ["network-online.target"];
+    };
+    Install = {
+      WantedBy = ["default.target"];
+    };
+    Service = {
+      Type = "forking";
+      ExecStartPre = [
+        "${pkgs.coreutils}/bin/sleep 2s"
+        ''
+          ${pkgs.podman}/bin/podman pod create --replace \
+            --name vpn \
+            --userns=host \
+            -p 8080:8080/tcp
+        ''
+      ];
+      ExecStart = "${pkgs.podman}/bin/podman pod start vpn";
+      ExecStop = "${pkgs.podman}/bin/podman pod stop vpn";
+      RestartSec = "1s";
+    };
+  };
+
   # Media providers pod
   systemd.user.services.pod-media = {
     Unit = {
@@ -101,6 +128,16 @@
   services.podman = {
     enable = true;
     autoUpdate.enable = true;
+
+    networks = {
+      servarrnetwork = {
+        driver = "bridge";
+        subnet = "10.88.5.0/24";
+        gateway = "10.88.5.1";
+        autoStart = true;
+        internal = true;
+      };
+    };
 
     containers = {
       portainer = {
@@ -137,6 +174,45 @@
         extraPodmanArgs = [
           "--pod=portainer" #TODO: Use another pod
           "--group-add=keep-groups"
+        ];
+      };
+
+      gluetun = {
+        image = "docker.io/qmcgaw/gluetun:latest";
+        autoStart = true;
+        autoUpdate = "registry";
+        volumes = ["/home/podman/gluetun:/gluetun"];
+        environmentFile = ["/home/podman/gluetun.env"]; #TODO: Change
+        extraPodmanArgs = [
+          "--pod=vpn"
+          "--cap-add=NET_ADMIN"
+          "--device=/dev/net/tun"
+          "--health-cmd=ping -c 1 www.google.com || exit 1"
+          "--health-interval=20s"
+          "--health-retries=5"
+        ];
+      };
+
+      qbittorrent = {
+        image = "lscr.io/linuxserver/qbittorrent:latest";
+        autoStart = true;
+        autoUpdate = "registry";
+
+        volumes = [
+          "/home/podman/qbittorrent:/config" # config files
+          "/home/podman/media/downloads:/downloads" # torrent download path
+        ];
+
+        environment = {
+          PUID = "1200";
+          PGID = "1201";
+          UMASK_SET = "022";
+          WEBUI_PORT = "8080";
+        };
+
+        extraPodmanArgs = [
+          "--pod=vpn"
+          "--restart=always"
         ];
       };
 
@@ -238,7 +314,7 @@
         };
 
         extraPodmanArgs = [
-          # "--pod=media"
+          #"--pod=media"
           "--group-add=keep-groups"
         ];
       };
