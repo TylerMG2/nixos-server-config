@@ -176,6 +176,7 @@
         extraPodmanArgs = [
           "--pod=portainer" #TODO: Use another pod
           "--group-add=keep-groups"
+          "--userns=keep-id"
         ];
       };
 
